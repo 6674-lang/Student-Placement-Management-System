@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students | SPMS</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #172554;
+            color: white;
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 1250px;
+            margin: 35px auto;
+            padding: 0 25px;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: white;
+            padding: 25px;
+
+            border-radius: 15px;
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .header h1 {
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #64748b;
+        }
+
+        /* FILTER AREA */
+
+        .filters {
+            background: white;
+            padding: 20px;
+
+            border-radius: 12px;
+            margin-bottom: 20px;
+
+            display: flex;
+            gap: 15px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .search-input,
+        .department-select {
+            padding: 13px 15px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-input {
+            flex: 1;
+        }
+
+        .department-select {
+            min-width: 210px;
+            background: white;
+        }
+
+        .search-input:focus,
+        .department-select:focus {
+            border-color: #2563eb;
+        }
+
+        /* TABLE */
+
+        .table-card {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+            overflow-x: auto;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #172554;
+            color: white;
+
+            padding: 15px;
+
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 14px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .student-name {
+            color: #172554;
+            font-weight: bold;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .placed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .not-placed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* ACTION BUTTONS */
+
+        .actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .view-btn,
+        .edit-btn,
+        .delete-btn {
+            display: inline-block;
+
+            padding: 7px 10px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .view-btn {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .edit-btn {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+            padding: 50px;
+            color: #64748b;
+        }
+
+        .no-result {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 18px 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .department-select {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            SPMS
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'students' %}">
+                Students
+            </a>
+
+            <a href="{% url 'companies' %}">
+                Companies
+            </a>
+
+            <a href="{% url 'placements' %}">
+                Placements
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h1>
+                Student Management
+            </h1>
+
+            <p>
+                Search, view, edit and manage student information.
+            </p>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="studentSearch"
+                class="search-input"
+                placeholder="🔍 Search by name, email or skills..."
+                onkeyup="filterStudents()"
+            >
+
+
+            <select
+                id="departmentFilter"
+                class="department-select"
+                onchange="filterStudents()">
+
+                <option value="">
+                    All Departments
+                </option>
+
+                <option value="computer science">
+                    Computer Science
+                </option>
+
+                <option value="information technology">
+                    Information Technology
+                </option>
+
+                <option value="bca">
+                    BCA
+                </option>
+
+                <option value="b.sc">
+                    B.Sc
+                </option>
+
+                <option value="bcom">
+                    B.Com
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-card">
+
+            {% if students %}
+
+            <table id="studentTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Name
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            CGPA
+                        </th>
+
+                        <th>
+                            Skills
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td class="student-name">
+                            {{ student.name }}
+                        </td>
+
+                        <td>
+                            {{ student.email }}
+                        </td>
+
+                        <td>
+                            {{ student.department }}
+                        </td>
+
+                        <td>
+                            {{ student.cgpa }}
+                        </td>
+
+                        <td>
+                            {{ student.skills }}
+                        </td>
+
+                        <td>
+
+                            {% if student.placed %}
+
+                            <span class="status placed">
+                                ✓ Placed
+                            </span>
+
+                            {% else %}
+
+                            <span class="status not-placed">
+                                Not Placed
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <a
+                                    href="{% url 'student_detail' student.id %}"
+                                    class="view-btn">
+                                    View
+                                </a>
+
+                                <a
+                                    href="{% url 'edit_student' student.id %}"
+                                    class="edit-btn">
+                                    Edit
+                                </a>
+
+                                <a
+                                    href="{% url 'delete_student' student.id %}"
+                                    class="delete-btn"
+                                    onclick="return confirm('Are you sure you want to delete this student?');">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+            <div
+                id="noResult"
+                class="no-result">
+
+                <h3>
+                    No matching student found
+                </h3>
+
+                <p style="margin-top: 8px;">
+                    Try another name, department or skill.
+                </p>
+
+            </div>
+
+
+            {% else %}
+
+            <div class="empty">
+
+                <h3>
+                    No Students Found
+                </h3>
+
+                <p style="margin-top: 8px;">
+                    Add students from the Django Admin Panel.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+
+    <!-- SEARCH + FILTER -->
+
+    <script>
+
+        function filterStudents() {
+
+            let searchInput =
+                document
+                .getElementById("studentSearch")
+                .value
+                .toLowerCase()
+                .trim();
+
+
+            let department =
+                document
+                .getElementById("departmentFilter")
+                .value
+                .toLowerCase()
+                .trim();
+
+
+            let rows =
+                document.querySelectorAll(
+                    "#studentTable tbody tr"
+                );
+
+
+            let visibleRows = 0;
+
+
+            rows.forEach(function(row) {
+
+                let rowText =
+                    row.innerText.toLowerCase();
+
+
+                let departmentText =
+                    row.cells[2].innerText
+                    .toLowerCase()
+                    .trim();
+
+
+                let matchesSearch =
+                    rowText.includes(searchInput);
+
+
+                let matchesDepartment =
+                    department === "" ||
+                    departmentText.includes(department);
+
+
+                if (
+                    matchesSearch &&
+                    matchesDepartment
+                ) {
+
+                    row.style.display = "";
+
+                    visibleRows++;
+
+                } else {
+
+                    row.style.display = "none";
+
+                }
+
+            });
+
+
+            let noResult =
+                document.getElementById("noResult");
+
+
+            if (
+                visibleRows === 0 &&
+                (searchInput !== "" || department !== "")
+            ) {
+
+                noResult.style.display = "block";
+
+            } else {
+
+                noResult.style.display = "none";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
+

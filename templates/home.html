@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SPMS | Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 270px;
+            height: 100vh;
+
+            background: #0f172a;
+
+            color: white;
+
+            padding: 25px 15px;
+
+            overflow-y: auto;
+
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+
+            background: white;
+
+            color: #991b1b;
+
+            width: 220px;
+
+            margin: 0 auto 35px;
+
+            padding: 22px 10px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            font-size: 30px;
+
+            font-family: Georgia, serif;
+
+            font-weight: bold;
+        }
+
+
+        /* MENU TITLE */
+
+        .menu-title {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin: 25px 20px 12px;
+        }
+
+
+        /* MENU */
+
+        .menu {
+
+            list-style: none;
+        }
+
+
+        .menu li {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            padding: 15px 20px;
+
+            border-radius: 14px;
+
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .menu a:hover {
+
+            background: #1e293b;
+
+            color: white;
+
+        }
+
+
+        /* ACTIVE */
+
+        .menu a.active {
+
+            background: #059669;
+
+            color: white;
+
+            font-weight: bold;
+
+            box-shadow: 0 5px 15px rgba(5,150,105,0.25);
+
+        }
+
+
+        .icon {
+
+            width: 25px;
+
+            text-align: center;
+
+            font-size: 20px;
+
+        }
+
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        .main {
+
+            margin-left: 270px;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* TOPBAR */
+
+        .topbar {
+
+            height: 75px;
+
+            background: white;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 0 35px;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
+        }
+
+
+        .topbar h2 {
+
+            color: #0f172a;
+
+        }
+
+
+        .profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .profile-circle {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #e2e8f0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+
+            padding: 35px;
+
+        }
+
+
+        .welcome {
+
+            background: linear-gradient(
+                135deg,
+                #172554,
+                #1e3a8a
+            );
+
+            color: white;
+
+            padding: 35px;
+
+            border-radius: 20px;
+
+            margin-bottom: 30px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .welcome h1 {
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .welcome p {
+
+            color: #cbd5e1;
+
+            font-size: 16px;
+
+        }
+
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.06);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            transition: 0.3s;
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.10);
+        }
+
+
+        .card-icon {
+
+            width: 58px;
+
+            height: 58px;
+
+            border-radius: 15px;
+
+            background: #dcfce7;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 27px;
+        }
+
+
+        .card h3 {
+
+            font-size: 28px;
+
+            color: #0f172a;
+
+            margin-bottom: 5px;
+        }
+
+
+        .card p {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .section-title {
+
+            margin-bottom: 18px;
+
+            color: #172554;
+
+            font-size: 22px;
+        }
+
+
+        .actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .action {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            text-decoration: none;
+
+            color: #172554;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.06);
+
+            transition: 0.3s;
+        }
+
+
+        .action:hover {
+
+            transform: translateY(-4px);
+
+            background: #f8fafc;
+        }
+
+
+        .action-icon {
+
+            font-size: 32px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .action h3 {
+
+            margin-bottom: 7px;
+        }
+
+
+        .action p {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           MOBILE BUTTON
+        ========================= */
+
+        .mobile-menu {
+
+            display: none;
+
+            background: #059669;
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 14px;
+
+            border-radius: 8px;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+
+                left: -270px;
+
+                transition: 0.3s;
+
+            }
+
+
+            .sidebar.show {
+
+                left: 0;
+
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+            }
+
+
+            .mobile-menu {
+
+                display: block;
+
+            }
+
+
+            .cards {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .actions {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+
+                padding: 0 18px;
+
+            }
+
+
+            .topbar h2 {
+
+                font-size: 18px;
+
+            }
+
+
+            .content {
+
+                padding: 20px;
+
+            }
+
+
+            .welcome {
+
+                padding: 25px;
+
+            }
+
+
+            .welcome h1 {
+
+                font-size: 24px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        SPMS
+
+    </div>
+
+
+    <!-- MAIN MENU -->
+
+    <div class="menu-title">
+
+        MAIN MENU
+
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+
+            <a href="{% url 'home' %}"
+               class="active">
+
+                <span class="icon">🏠</span>
+
+                Dashboard
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+    <!-- MY JOURNEY -->
+
+    <div class="menu-title">
+
+        MY JOURNEY
+
+    </div>
+
+
+    <ul class="menu">
+
+
+        <li>
+
+            <a href="{% url 'students' %}">
+
+                <span class="icon">👨‍🎓</span>
+
+                Students
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'companies' %}">
+
+                <span class="icon">🏢</span>
+
+                Companies
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'placements' %}">
+
+                <span class="icon">🎯</span>
+
+                Placements
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'add_placement' %}">
+
+                <span class="icon">➕</span>
+
+                Add Placement
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+    <!-- ACCOUNT -->
+
+    <div class="menu-title">
+
+        ACCOUNT
+
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+
+            <a href="/admin/">
+
+                <span class="icon">⚙️</span>
+
+                Admin Panel
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+</aside>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+
+        <button
+            class="mobile-menu"
+            onclick="toggleSidebar()">
+
+            ☰
+
+        </button>
+
+
+        <h2>
+
+            Student Placement Management System
+
+        </h2>
+
+
+        <div class="profile">
+
+            <span>
+
+                Admin
+
+            </span>
+
+            <div class="profile-circle">
+
+                👤
+
+            </div>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- CONTENT -->
+
+    <main class="content">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <h1>
+
+                Welcome to SPMS 👋
+
+            </h1>
+
+            <p>
+
+                Manage students, companies and placement records
+                from one place.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- STAT CARDS -->
+
+        <section class="cards">
+
+
+            <!-- STUDENTS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+
+                    👨‍🎓
+
+                </div>
+
+                <div>
+
+                    <h3>
+
+                        {{ total_students }}
+
+                    </h3>
+
+                    <p>
+
+                        Total Students
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- COMPANIES -->
+
+            <div class="card">
+
+                <div class="card-icon">
+
+                    🏢
+
+                </div>
+
+                <div>
+
+                    <h3>
+
+                        {{ total_companies }}
+
+                    </h3>
+
+                    <p>
+
+                        Total Companies
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PLACED -->
+
+            <div class="card">
+
+                <div class="card-icon">
+
+                    🎯
+
+                </div>
+
+                <div>
+
+                    <h3>
+
+                        {{ placed_students }}
+
+                    </h3>
+
+                    <p>
+
+                        Students Placed
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- QUICK ACTIONS -->
+
+        <h2 class="section-title">
+
+            Quick Actions
+
+        </h2>
+
+
+        <section class="actions">
+
+
+            <a
+                href="{% url 'students' %}"
+                class="action">
+
+                <div class="action-icon">
+
+                    👨‍🎓
+
+                </div>
+
+                <h3>
+
+                    Manage Students
+
+                </h3>
+
+                <p>
+
+                    View and manage student details.
+
+                </p>
+
+            </a>
+
+
+
+            <a
+                href="{% url 'companies' %}"
+                class="action">
+
+                <div class="action-icon">
+
+                    🏢
+
+                </div>
+
+                <h3>
+
+                    Manage Companies
+
+                </h3>
+
+                <p>
+
+                    View companies and job opportunities.
+
+                </p>
+
+            </a>
+
+
+
+            <a
+                href="{% url 'add_placement' %}"
+                class="action">
+
+                <div class="action-icon">
+
+                    🎯
+
+                </div>
+
+                <h3>
+
+                    Add Placement
+
+                </h3>
+
+                <p>
+
+                    Create a new student placement record.
+
+                </p>
+
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    function toggleSidebar() {
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        sidebar.classList.toggle("show");
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SPMS</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f3f6fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .login-card {
+            background: white;
+            padding: 45px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.10);
+        }
+
+        /* LOGO */
+
+        .logo {
+            width: 290px;
+            margin: 0 auto 35px;
+            padding: 28px 15px;
+            background: white;
+            border-radius: 20px;
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 48px;
+            color: #991b1b;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        }
+
+        /* TITLE */
+
+        .welcome {
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 42px;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 35px;
+        }
+
+        /* TABS */
+
+        .tabs {
+            display: flex;
+            background: #eef2f8;
+            border-radius: 14px;
+            padding: 5px;
+            margin-bottom: 35px;
+        }
+
+        .tab {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 15px 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: white;
+            color: #0f172a;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 17px;
+            font-weight: bold;
+            color: #172033;
+            margin-bottom: 10px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #d5dce5;
+            border-radius: 13px;
+            font-size: 17px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #172554;
+        }
+
+        input::placeholder {
+            color: #9ca3af;
+        }
+
+        .password-input {
+            padding-right: 55px;
+        }
+
+        .eye {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            font-size: 22px;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+
+        /* ERROR */
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px 15px;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* SIGN IN */
+
+        .sign-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 13px;
+            background: #0f172a;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sign-btn:hover {
+            background: #172554;
+            transform: translateY(-1px);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            color: #94a3b8;
+            font-size: 16px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-card {
+                padding: 28px 20px;
+            }
+
+            .logo {
+                width: 230px;
+                font-size: 38px;
+                padding: 22px 10px;
+            }
+
+            .welcome {
+                font-size: 34px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .tab {
+                font-size: 13px;
+                padding: 13px 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+    <div class="login-card">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            Vel Tech
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1 class="welcome">
+            Welcome Back.
+        </h1>
+
+        <p class="subtitle">
+            Please sign in to access the campus<br>
+            recruitment portal.
+        </p>
+
+
+        <!-- USER TYPE -->
+
+        <div class="tabs">
+
+            <button
+                type="button"
+                class="tab active"
+                onclick="selectRole(this, 'Student')">
+
+                STUDENT
+
+            </button>
+
+            <button
+                type="button"
+                class="tab"
+                onclick="selectRole(this, 'Staff')">
+
+                STAFF
+
+            </button>
+
+            <button
+                type="button"
+                class="tab"
+                onclick="selectRole(this, 'Parent')">
+
+                PARENT
+
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- ROLE -->
+
+            <input
+                type="hidden"
+                name="role"
+                id="role"
+                value="Student">
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label id="idLabel">
+                    Student ID
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Student ID Here"
+                    required>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="password-input"
+                        placeholder="Enter Password"
+                        required>
+
+                    <button
+                        type="button"
+                        class="eye"
+                        onclick="togglePassword()">
+
+                        👁️
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="sign-btn">
+
+                Sign In &nbsp; →
+
+            </button>
+
+        </form>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+            © 2026 Vel Tech. All Rights Reserved.
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("password");
+
+        const eye =
+            document.querySelector(".eye");
+
+        if (password.type === "password") {
+
+            password.type = "text";
+            eye.innerHTML = "🙈";
+
+        } else {
+
+            password.type = "password";
+            eye.innerHTML = "👁️";
+
+        }
+
+    }
+
+
+    function selectRole(button, role) {
+
+        const tabs =
+            document.querySelectorAll(".tab");
+
+        tabs.forEach(function(tab) {
+            tab.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        document.getElementById("role").value = role;
+
+        const label =
+            document.getElementById("idLabel");
+
+        const username =
+            document.getElementById("username");
+
+
+        if (role === "Student") {
+
+            label.innerText = "Student ID";
+            username.placeholder = "Student ID Here";
+
+        }
+
+        else if (role === "Staff") {
+
+            label.innerText = "Staff ID";
+            username.placeholder = "Staff ID Here";
+
+        }
+
+        else {
+
+            label.innerText = "Parent ID";
+            username.placeholder = "Parent ID Here";
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

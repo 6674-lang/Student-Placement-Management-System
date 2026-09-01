@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Placement | SPMS</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: #172554;
+            color: white;
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+
+            color: #334155;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        button,
+        .cancel-btn {
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            text-decoration: none;
+        }
+
+        button {
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .cancel-btn {
+            background: #e2e8f0;
+
+            color: #172554;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        SPMS
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'students' %}">
+            Students
+        </a>
+
+        <a href="{% url 'companies' %}">
+            Companies
+        </a>
+
+        <a href="{% url 'placements' %}">
+            Placements
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            ✏️ Edit Placement
+        </h1>
+
+        <p class="subtitle">
+            Update the student placement information.
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label>
+                    Student
+                </label>
+
+                <select name="student" required>
+
+                    {% for student in students %}
+
+                    <option
+                        value="{{ student.id }}"
+                        {% if student.id == placement.student.id %}
+                            selected
+                        {% endif %}>
+
+                        {{ student.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Company
+                </label>
+
+                <select name="company" required>
+
+                    {% for company in companies %}
+
+                    <option
+                        value="{{ company.id }}"
+                        {% if company.id == placement.company.id %}
+                            selected
+                        {% endif %}>
+
+                        {{ company.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Job Role
+                </label>
+
+                <input
+                    type="text"
+                    name="job_role"
+                    value="{{ placement.job_role }}"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Package
+                </label>
+
+                <input
+                    type="text"
+                    name="package"
+                    value="{{ placement.package }}"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Placement Date
+                </label>
+
+                <input
+                    type="date"
+                    name="placement_date"
+                    value="{{ placement.placement_date|date:'Y-m-d' }}">
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button type="submit">
+
+                    💾 Update Placement
+
+                </button>
+
+                <a
+                    href="{% url 'placements' %}"
+                    class="cancel-btn">
+
+                    ← Cancel
+
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Placement System</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Student Placement System</h1>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/students/">Students</a>
+            <a href="/companies/">Companies</a>
+            <a href="/placements/">Placements</a>
+            
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to Student Placement System</h2>
+
+        <p>
+            Manage student placements, companies and job opportunities
+            in one simple platform.
+        </p>
+
+        <a href="#" class="btn">Get Started</a>
+    </section>
+
+    <section class="cards">
+
+        <div class="card">
+            <h3>👨‍🎓 Students</h3>
+            <p>Register and manage student placement details.</p>
+        </div>
+
+        <div class="card">
+            <h3>🏢 Companies</h3>
+            <p>View and manage companies offering placement opportunities.</p>
+        </div>
+
+        <div class="card">
+            <h3>💼 Placements</h3>
+            <p>Track placement opportunities and student selection status.</p>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 Student Placement System</p>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+
+</body>
+</html>
